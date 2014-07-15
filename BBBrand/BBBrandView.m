@@ -18,7 +18,9 @@
     }
     self.viewframe = frame;
     [self setupSelf];
-    self.brandsArray = [[NSMutableArray alloc] initWithObjects:@"real madrid",@"bacelona",@"man utd",@"arsenal",@"liverpool",@"ac milan",@"milan international",@"guangzhou evergrande", nil];
+    self.brandsArray = [[NSMutableArray alloc] initWithObjects:@"sadasdas",@"sadsad",@"sadsasd2",@"sadasdas",@"sadsad",@"sadsasd2",@"sadasdas",@"sadsad",@"sadsasd2",@"sadasdas",@"sadsad",@"sadsasd2",@"sadasdas",@"sadsad",@"sadsasd2",@"sadasdas",@"sadsad",@"sadsasd2",@"sadasdas",@"sadsad",@"sadsasd2",@"sadasdas",@"sadsad",@"sadsasd2",@"sadasdas",@"sadsad",@"sadsasd2",@"sadasdas",@"sadsad",@"sadsasd2",@"sadasdas",@"sadsad",@"sadsasd2",@"sadasdas",@"sadsad",@"sadsasd2",@"sadasdas",@"sadsad",@"sadsasd2",@"sadasdas",@"sadsad",@"sadsasd2",nil];
+    //self.brandsTitleArray = [[NSMutableArray alloc] initWithObjects:
+    //                         @"A",@"C",@"F",@"G",@"H",@"M",@"S",@"T",@"X",@"Z", nil];
     [self setupSelf];
     
 //    self.dataSource = self;
@@ -32,6 +34,7 @@
     NSLog(@"frame  x: %f ,y: %f, height: %f, width: %f\n",self.viewframe.origin.x,
               self.viewframe.origin.y,
               self.viewframe.size.height,self.viewframe.size.width);
+    //NSLog(@"count is %lu\n",(unsigned long)self.brandsArray.count);
     self.brandsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.viewframe.size.width, self.viewframe.size.height)];
     //self.brandsTableView.backgroundColor = [UIColor redColor];
 
@@ -52,7 +55,7 @@
 #pragma mark - Table view data source
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.brandsArray count];
+    return self.brandsArray.count + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -63,15 +66,30 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     NSUInteger row = [indexPath row];
-    cell.textLabel.text = [self.brandsArray objectAtIndex:row];
+    if(row == 0){
+        cell.textLabel.text = @" ";
+    }
+    else{
+        cell.textLabel.text = [self.brandsArray objectAtIndex:row - 1];
+    }
+    
     return cell;
 }
 
 #pragma mark - Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ;
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.row == 0){
+        return 100;
+    }
+    else
+        return 44;
 }
 
 @end

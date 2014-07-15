@@ -41,13 +41,16 @@
 {
     UIImage *bgd = [UIImage imageNamed:@"back.png"];
     UIImageView *bgdView = [[UIImageView alloc] initWithImage:bgd];
-
-    [self.view addSubview:bgdView];
+    bgdView.alpha = 0.90f;
+    
+    
     
 
-    BBBrandView *tmp = [[BBBrandView alloc] initWithFrame:CGRectMake(0, bgdView.frame.origin.y + bgdView.bounds.size.height, 320, self.view.bounds.size.height - bgdView.bounds.size.height)];
+//    BBBrandView *tmp = [[BBBrandView alloc] initWithFrame:CGRectMake(0, bgdView.frame.origin.y + bgdView.bounds.size.height, 320, self.view.bounds.size.height - bgdView.bounds.size.height)];
+    BBBrandView *tmp = [[BBBrandView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.bounds.size.height)];
     //DLog();
     [self.view addSubview:tmp];
+    [self.view addSubview:bgdView];
 }
 /*
 #pragma mark - Navigation
