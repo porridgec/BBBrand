@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BBBrandView : UIView
+@interface BBBrandView : UIView <UITableViewDataSource,UITableViewDelegate>
+@property CGRect viewframe;
+@property (nonatomic,strong) NSMutableArray *brandsArray;
+@property (nonatomic,strong) UITableView *brandsTableView;
+
 
 @end

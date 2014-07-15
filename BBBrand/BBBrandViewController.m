@@ -39,9 +39,14 @@
 
 - (void)setupView
 {
-    BBBrandView *tmp = [[BBBrandView alloc] initWithFrame:CGRectMake(10, 10, 160  , 240)];
-    tmp.backgroundColor = [UIColor yellowColor];
-    DLog();
+    UIImage *bgd = [UIImage imageNamed:@"back.png"];
+    UIImageView *bgdView = [[UIImageView alloc] initWithImage:bgd];
+
+    [self.view addSubview:bgdView];
+    
+
+    BBBrandView *tmp = [[BBBrandView alloc] initWithFrame:CGRectMake(0, bgdView.frame.origin.y + bgdView.bounds.size.height, 320, self.view.bounds.size.height - bgdView.bounds.size.height)];
+    //DLog();
     [self.view addSubview:tmp];
 }
 /*
@@ -54,5 +59,8 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+
+
 
 @end
