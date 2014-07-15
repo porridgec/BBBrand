@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A922CC5E1974D85E0096809B /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = A922CC5D1974D85E0096809B /* back.png */; };
 		A98EEE941974CDFE0029BA79 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A98EEE931974CDFE0029BA79 /* Foundation.framework */; };
 		A98EEE961974CDFE0029BA79 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A98EEE951974CDFE0029BA79 /* CoreGraphics.framework */; };
 		A98EEE981974CDFE0029BA79 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A98EEE971974CDFE0029BA79 /* UIKit.framework */; };
@@ -20,6 +21,7 @@
 		A98EEEB71974CDFE0029BA79 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A98EEEB51974CDFE0029BA79 /* InfoPlist.strings */; };
 		A98EEEB91974CDFE0029BA79 /* BBBrandTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A98EEEB81974CDFE0029BA79 /* BBBrandTests.m */; };
 		A98EEEC41974CE190029BA79 /* BBBrandViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A98EEEC31974CE190029BA79 /* BBBrandViewController.m */; };
+		A98EEEC71974CF530029BA79 /* BBBrandView.m in Sources */ = {isa = PBXBuildFile; fileRef = A98EEEC61974CF530029BA79 /* BBBrandView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A922CC5D1974D85E0096809B /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		A98EEE901974CDFE0029BA79 /* BBBrand.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BBBrand.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A98EEE931974CDFE0029BA79 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A98EEE951974CDFE0029BA79 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -51,6 +54,8 @@
 		A98EEEB81974CDFE0029BA79 /* BBBrandTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BBBrandTests.m; sourceTree = "<group>"; };
 		A98EEEC21974CE190029BA79 /* BBBrandViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBBrandViewController.h; sourceTree = "<group>"; };
 		A98EEEC31974CE190029BA79 /* BBBrandViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBBrandViewController.m; sourceTree = "<group>"; };
+		A98EEEC51974CF530029BA79 /* BBBrandView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBBrandView.h; sourceTree = "<group>"; };
+		A98EEEC61974CF530029BA79 /* BBBrandView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBBrandView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +82,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A922CC5C1974D84B0096809B /* images */ = {
+			isa = PBXGroup;
+			children = (
+				A922CC5D1974D85E0096809B /* back.png */,
+			);
+			name = images;
+			sourceTree = "<group>";
+		};
 		A98EEE871974CDFE0029BA79 = {
 			isa = PBXGroup;
 			children = (
@@ -114,7 +127,10 @@
 				A98EEEA31974CDFE0029BA79 /* BBAppDelegate.m */,
 				A98EEEC21974CE190029BA79 /* BBBrandViewController.h */,
 				A98EEEC31974CE190029BA79 /* BBBrandViewController.m */,
+				A98EEEC51974CF530029BA79 /* BBBrandView.h */,
+				A98EEEC61974CF530029BA79 /* BBBrandView.m */,
 				A98EEEA51974CDFE0029BA79 /* Images.xcassets */,
+				A922CC5C1974D84B0096809B /* images */,
 				A98EEE9A1974CDFE0029BA79 /* Supporting Files */,
 			);
 			path = BBBrand;
@@ -195,7 +211,7 @@
 			attributes = {
 				CLASSPREFIX = BB;
 				LastUpgradeCheck = 0510;
-				ORGANIZATIONNAME = Hahn.Chan;
+				ORGANIZATIONNAME = HWFC;
 				TargetAttributes = {
 					A98EEEAA1974CDFE0029BA79 = {
 						TestTargetID = A98EEE8F1974CDFE0029BA79;
@@ -227,6 +243,7 @@
 			files = (
 				A98EEE9E1974CDFE0029BA79 /* InfoPlist.strings in Resources */,
 				A98EEEA61974CDFE0029BA79 /* Images.xcassets in Resources */,
+				A922CC5E1974D85E0096809B /* back.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,6 +264,7 @@
 			files = (
 				A98EEEA41974CDFE0029BA79 /* BBAppDelegate.m in Sources */,
 				A98EEEC41974CE190029BA79 /* BBBrandViewController.m in Sources */,
+				A98EEEC71974CF530029BA79 /* BBBrandView.m in Sources */,
 				A98EEEA01974CDFE0029BA79 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -444,6 +462,7 @@
 				A98EEEBE1974CDFE0029BA79 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A98EEEBF1974CDFE0029BA79 /* Build configuration list for PBXNativeTarget "BBBrandTests" */ = {
 			isa = XCConfigurationList;
@@ -452,6 +471,7 @@
 				A98EEEC11974CDFE0029BA79 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

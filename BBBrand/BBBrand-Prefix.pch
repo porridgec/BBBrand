@@ -14,3 +14,8 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
 #endif
+#ifdef DEBUG
+#   define DLog(fmt, ...) NSLog((@"\nDebug Info :\nin [%@] , \nFunc %s , [Line %d]\nLog : " fmt), [[NSString stringWithUTF8String:__FILE__] lastPathComponent],__PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+#else
+#   define DLog(...)
+#endif

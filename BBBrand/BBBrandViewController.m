@@ -7,6 +7,7 @@
 //
 
 #import "BBBrandViewController.h"
+#import "BBBrandView.h"
 
 @interface BBBrandViewController ()
 
@@ -27,6 +28,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self setupView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -35,6 +37,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)setupView
+{
+    BBBrandView *tmp = [[BBBrandView alloc] initWithFrame:CGRectMake(10, 10, 160  , 240)];
+    tmp.backgroundColor = [UIColor yellowColor];
+    DLog();
+    [self.view addSubview:tmp];
+}
 /*
 #pragma mark - Navigation
 

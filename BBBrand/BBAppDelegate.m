@@ -7,6 +7,7 @@
 //
 
 #import "BBAppDelegate.h"
+#import "BBBrandViewController.h"
 
 @implementation BBAppDelegate
 
@@ -15,6 +16,9 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
+    BBBrandViewController *vc = [[BBBrandViewController alloc] init];
+    //[vc setWantsFullScreenLayout:YES];
+    self.window.rootViewController = vc;
     [self.window makeKeyAndVisible];
     return YES;
 }
