@@ -11,8 +11,7 @@
 *.xcscheme
 *.plist
 
-
-BBBrand.xcodeproj/project.xcworkspace/xcuserdata/bloodshed.xcuserdatad/UserInterfaceState.xcuserstate
+BBBrand/BBBrand.xcodeproj/project.xcworkspace/xcuserdata/bloodshed.xcuserdatad/UserInterfaceState.xcuserstate
 
 *.pbxproj
 
