@@ -18,9 +18,21 @@
     }
     self.viewframe = frame;
     [self setupSelf];
-    self.brandsArray = [[NSMutableArray alloc] initWithObjects:@"sadasdas",@"sadsad",@"sadsasd2",@"sadasdas",@"sadsad",@"sadsasd2",@"sadasdas",@"sadsad",@"sadsasd2",@"sadasdas",@"sadsad",@"sadsasd2",@"sadasdas",@"sadsad",@"sadsasd2",@"sadasdas",@"sadsad",@"sadsasd2",@"sadasdas",@"sadsad",@"sadsasd2",@"sadasdas",@"sadsad",@"sadsasd2",@"sadasdas",@"sadsad",@"sadsasd2",@"sadasdas",@"sadsad",@"sadsasd2",@"sadasdas",@"sadsad",@"sadsasd2",@"sadasdas",@"sadsad",@"sadsasd2",@"sadasdas",@"sadsad",@"sadsasd2",@"sadasdas",@"sadsad",@"sadsasd2",nil];
-    //self.brandsTitleArray = [[NSMutableArray alloc] initWithObjects:
-    //                         @"A",@"C",@"F",@"G",@"H",@"M",@"S",@"T",@"X",@"Z", nil];
+    //self.brandsArray = [[NSMutableArray alloc] initWithObjects:@[@"阿伟",@"阿姨",@"阿三"],nil];
+    
+    self.sectionTitles       = [[NSArray alloc] initWithObjects:
+                           @"A",@"C",@"F",@"G",@"H",@"M",@"S",@"T",@"X",@"Z", nil];
+    self.contentsArray       = [[NSArray alloc] initWithObjects:
+                           @[@"阿伟",@"阿姨",@"阿三"],
+                           @[@"蔡芯",@"成龙",@"陈鑫",@"陈丹",@"成名"],
+                           @[@"芳仔",@"房祖名",@"方大同",@"芳芳",@"范伟"],
+                           @[@"郭靖",@"郭美美",@"过儿",@"过山车"],
+                           @[@"何仙姑",@"和珅",@"郝歌",@"好人"],
+                           @[@"妈妈",@"毛主席"],
+                           @[@"孙中山",@"沈冰",@"婶婶"],
+                           @[@"涛涛",@"淘宝",@"套娃"],
+                           @[@"小二",@"夏紫薇",@"许巍",@"许晴"],
+                           @[@"周恩来",@"周杰伦",@"张柏芝",@"张大仙"],nil];
     [self setupSelf];
     
 //    self.dataSource = self;
@@ -53,9 +65,20 @@
 
 
 #pragma mark - Table view data source
+- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return self.sectionTitles.count ;
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.brandsArray.count + 1;
+    //return self.brandsArray.count + 1;
+    NSArray *tmp = [self.contentsArray objectAtIndex:section];
+
+    if(section == 0)
+        return tmp.count + 1;
+    else
+        return tmp.count;
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -66,13 +89,27 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     NSUInteger row = [indexPath row];
-    if(row == 0){
-        cell.textLabel.text = @" ";
+    NSUInteger  section = indexPath.section;
+//    if(row == 0){
+//        cell.textLabel.text = @" ";
+//    }
+//    else{
+//        cell.textLabel.text = [self.brandsArray objectAtIndex:row - 1];
+//        
+//    }
+    if(section == 0){
+        if(row == 0)
+            cell.textLabel.text = @" ";
+        else
+            cell.textLabel.text = [[self.contentsArray objectAtIndex:section] objectAtIndex:row - 1];
+            //cell.textLabel.text = @" ";
     }
-    else{
-        cell.textLabel.text = [self.brandsArray objectAtIndex:row - 1];
-    }
+    else
+        cell.textLabel.text = [[self.contentsArray objectAtIndex:section] objectAtIndex:row];
+        //cell.textLabel.text = @" ";
     
+    
+
     return cell;
 }
 
@@ -85,11 +122,31 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.row == 0){
-        return 100;
+    if(indexPath.section == 0){
+        if(indexPath.row == 0)
+            return 100;
+        else
+            return 44;
     }
     else
         return 44;
 }
+
+
+// 每个分区的页眉
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if(section == 0)
+        return @" ";
+    else
+        return [self.sectionTitles objectAtIndex:section];
+}
+// 索引目录
+-(NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
+{
+    return self.sectionTitles;
+}
+
+
 
 @end

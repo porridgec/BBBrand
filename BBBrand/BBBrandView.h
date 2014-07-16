@@ -11,8 +11,10 @@
 @interface BBBrandView : UIView <UITableViewDataSource,UITableViewDelegate>
 @property CGRect viewframe;
 @property (strong,nonatomic) NSMutableArray *brandsArray;
-@property (strong,nonatomic) NSMutableArray *brandsTitleArray;
+@property (strong,nonatomic) NSMutableDictionary *brandsTitleDict;
 @property (nonatomic,strong) UITableView *brandsTableView;
+@property (strong,nonatomic) NSArray *sectionTitles;
+@property (strong,nonatomic) NSArray *contentsArray;
 
 
 @end
