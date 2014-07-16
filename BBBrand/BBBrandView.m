@@ -27,34 +27,29 @@
 #pragma mark - setup
 - (void)initData
 {
-//    NSURL *url = [NSURL URLWithString:@"http://m.feifei.com/api/brand/getBrandList"];
-//    NSError *error;
-//    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-//    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-//    NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableLeaves error:&error];
-//    NSArray *brandsDictArr = [responseDict objectForKey:@"result"];
+    //get dictionary of all brands
+    NSURL *url = [NSURL URLWithString:@"http://m.feifei.com/api/brand/getBrandList"];
+    NSError *error;
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableLeaves error:&error];
+    //
     
-    /* simulate
-     */
-    self.brandsTitleDict = [[NSMutableDictionary alloc] init];
-    [self.brandsTitleDict setObject:@[@"a",@"aa",@"aaa"] forKey:@"A"];
-    [self.brandsTitleDict setObject:@[@"b",@"bb",@"bbb"] forKey:@"B"];
-    [self.brandsTitleDict setObject:@[@"c",@"cc",@"ccc"] forKey:@"C"];
-    [self.brandsTitleDict setObject:@[@"cd",@"cc",@"ccc"] forKey:@"D"];
-    [self.brandsTitleDict setObject:@[@"ce",@"cc",@"ccc"] forKey:@"E"];
-    [self.brandsTitleDict setObject:@[@"cf",@"cc",@"ccc"] forKey:@"F"];
-    [self.brandsTitleDict setObject:@[@"cg",@"cc",@"ccc"] forKey:@"G"];
-    [self.brandsTitleDict setObject:@[@"ch",@"cc",@"ccc"] forKey:@"H"];
     
-    self.allKeysInDict   = [[NSMutableArray alloc] initWithArray:[self.brandsTitleDict allKeys]];
+    self.resultDict          = [responseDict objectForKey:@"result"];
+    self.allKeysInDict       = [[NSMutableArray alloc] initWithArray:[self.resultDict allKeys]];
     self.allKeysInDictSorted = [self.allKeysInDict sortedArrayUsingSelector:@selector(compare:)];
     
 }
 - (void)setupSelf
 {
-    self.brandsTableView            = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.viewframe.size.width, self.viewframe.size.height)];
-    self.brandsTableView.dataSource = self;
-    self.brandsTableView.delegate   = self;
+    self.brandsTableView                             = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.viewframe.size.width, self.viewframe.size.height)];
+    self.brandsTableView.dataSource                  = self;
+    self.brandsTableView.delegate                    = self;
+    self.brandsTableView.sectionIndexBackgroundColor = [UIColor whiteColor];
+    self.brandsTableView.sectionIndexColor           = [UIColor colorWithRed:0.37 green:0.71 blue:0.39 alpha:1.00];
+    
+    self.brandsTableView.sectionHeaderHeight = 23;
     [self addSubview:_brandsTableView];
 }
 
@@ -65,9 +60,7 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-
-    return [[self.brandsTitleDict objectForKey:[self.allKeysInDictSorted objectAtIndex:section]] count];
-    
+    return [[self.resultDict objectForKey:[self.allKeysInDictSorted objectAtIndex:section]]count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -80,7 +73,15 @@
     NSUInteger row = [indexPath row];
     NSUInteger  section = indexPath.section;
 
-    cell.textLabel.text = [[self.brandsTitleDict objectForKey:[self.allKeysInDictSorted objectAtIndex:section]] objectAtIndex:row];
+    cell.textLabel.text = [@" " stringByAppendingString:[[[self.resultDict objectForKey:[self.allKeysInDictSorted objectAtIndex:section]] objectAtIndex:row] objectForKey:@"name"]];
+    cell.textLabel.textColor = [UIColor colorWithRed:0.33 green:0.33 blue:0.33 alpha:1.00];
+    
+    CALayer *buttomLineLayer        = [CALayer layer];
+    buttomLineLayer.frame           = CGRectMake(0, 39.5 , 320, 0.5);
+    buttomLineLayer.backgroundColor = [UIColor colorWithRed:0.78 green:0.78 blue:0.80 alpha:1.00].CGColor;
+    
+    [cell.layer addSublayer:buttomLineLayer];
+
     return cell;
 }
 
@@ -94,19 +95,57 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 44;
+    return 40;
 }
 
 #pragma mark - index
 // set Header
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
+    if([[self.allKeysInDictSorted objectAtIndex:section] isEqual:@"other"])
+        return @"#";
     return [self.allKeysInDictSorted objectAtIndex:section];
 }
 // index
 -(NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
 {
-    return self.allKeysInDictSorted;
+    NSMutableArray *tmp = [[NSMutableArray alloc] initWithArray:self.allKeysInDictSorted];
+    [tmp removeLastObject];
+    [tmp addObject:@"#"];
+    return tmp;
 }
 
+#pragma mark - custom Header of index
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *customHeaderView         = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 23)];
+    customHeaderView.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.96 alpha:1.00];
+    UILabel *indexLabel              = [[UILabel alloc] initWithFrame:CGRectMake(22, 0, 100, 23)];
+    
+    if([[self.allKeysInDictSorted objectAtIndex:section] isEqual:@"other"])
+        indexLabel.text = @"#";
+    else
+        indexLabel.text = [self.allKeysInDictSorted objectAtIndex:section];
+    
+    [self.allKeysInDictSorted objectAtIndex:section];
+
+    indexLabel.textColor = [UIColor colorWithRed:0.37 green:0.71 blue:0.39 alpha:1.00];
+    
+    [customHeaderView addSubview:indexLabel];
+    
+    
+    
+    CALayer *topLineLayer           = [CALayer layer];
+    topLineLayer.frame              = CGRectMake(0, 0, 320, 0.5);
+    topLineLayer.backgroundColor = [UIColor colorWithRed:0.78 green:0.78 blue:0.80 alpha:1.00].CGColor;
+
+    
+    CALayer *buttomLineLayer        = [CALayer layer];
+    buttomLineLayer.frame           = CGRectMake(0, 22.5 , 320, 0.5);
+    buttomLineLayer.backgroundColor = [UIColor colorWithRed:0.78 green:0.78 blue:0.80 alpha:1.00].CGColor;
+    
+    [customHeaderView.layer addSublayer:buttomLineLayer];
+    [customHeaderView.layer addSublayer:topLineLayer];
+    return customHeaderView;
+}
 @end

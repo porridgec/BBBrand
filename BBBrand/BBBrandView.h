@@ -11,8 +11,19 @@
 @interface BBBrandView : UIView <UITableViewDataSource,UITableViewDelegate>
 
 @property CGRect viewframe;
-@property (strong,nonatomic) NSMutableDictionary *brandsTitleDict;
-@property (nonatomic,strong) UITableView         *brandsTableView;
+
+@property (strong,nonatomic) UITableView         *brandsTableView;
+
+@property (strong,nonatomic) NSMutableDictionary *resultDict;
+/* resultDict is like
+ * {
+ *    "A" : @[......];
+ *    "B" : @[......];
+ *     .
+ *     .
+ *  }
+ *
+ */
 @property (strong,nonatomic) NSMutableArray      *allKeysInDict;
 @property (strong,nonatomic) NSArray             *allKeysInDictSorted;
 
