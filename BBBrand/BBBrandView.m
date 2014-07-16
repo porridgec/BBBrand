@@ -17,41 +17,39 @@
         // Initialization code
     }
     self.viewframe = frame;
-    [self setupSelf];
-    //self.brandsArray = [[NSMutableArray alloc] initWithObjects:@[@"阿伟",@"阿姨",@"阿三"],nil];
-    
-    self.sectionTitles       = [[NSArray alloc] initWithObjects:@"",
-                           @"A",@"C",@"F",@"G",@"H",@"M",@"S",@"T",@"X",@"Z", nil];
-    self.contentsArray       = [[NSArray alloc] initWithObjects:@[@""],
-                           @[@"阿伟",@"阿姨",@"阿三"],
-                           @[@"蔡芯",@"成龙",@"陈鑫",@"陈丹",@"成名"],
-                           @[@"芳仔",@"房祖名",@"方大同",@"芳芳",@"范伟"],
-                           @[@"郭靖",@"郭美美",@"过儿",@"过山车"],
-                           @[@"何仙姑",@"和珅",@"郝歌",@"好人"],
-                           @[@"妈妈",@"毛主席"],
-                           @[@"孙中山",@"沈冰",@"婶婶"],
-                           @[@"涛涛",@"淘宝",@"套娃"],
-                           @[@"小二",@"夏紫薇",@"许巍",@"许晴"],
-                           @[@"周恩来",@"周杰伦",@"张柏芝",@"张大仙"],nil];
+
+    [self initData];
     [self setupSelf];
     
-//    self.dataSource = self;
-//    self.delegate   = self;
     return self;
 }
 
+- (void)initData
+{
+//    NSURL *url = [NSURL URLWithString:@"http://m.feifei.com/api/brand/getBrandList"];
+//    NSError *error;
+//    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+//    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+//    NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableLeaves error:&error];
+//    NSArray *brandsDictArr = [responseDict objectForKey:@"result"];
+    
+    /* simulate
+     */
+    self.brandsTitleDict = [[NSMutableDictionary alloc] init];
+    [self.brandsTitleDict setObject:@[@"a",@"aa",@"aaa"] forKey:@"A"];
+    [self.brandsTitleDict setObject:@[@"b",@"bb",@"bbb"] forKey:@"B"];
+    [self.brandsTitleDict setObject:@[@"c",@"cc",@"ccc"] forKey:@"C"];
+    //
+    
+    self.allValuesInDict = [[NSMutableArray alloc] initWithArray:[self.brandsTitleDict allValues]];
+    self.allKeysInDict   = [[NSMutableArray alloc] initWithArray:[self.brandsTitleDict allKeys]];
+    
+}
 - (void)setupSelf
 {
-    self.backgroundColor = [UIColor blueColor];
-    NSLog(@"frame  x: %f ,y: %f, height: %f, width: %f\n",self.viewframe.origin.x,
-              self.viewframe.origin.y,
-              self.viewframe.size.height,self.viewframe.size.width);
-    //NSLog(@"count is %lu\n",(unsigned long)self.brandsArray.count);
-    self.brandsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, -100, self.viewframe.size.width, self.viewframe.size.height + 100)];
-    //self.brandsTableView.backgroundColor = [UIColor redColor];
-
-    self.brandsTableView.dataSource      = self;
-    self.brandsTableView.delegate        = self;
+    self.brandsTableView            = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.viewframe.size.width, self.viewframe.size.height)];
+    self.brandsTableView.dataSource = self;
+    self.brandsTableView.delegate   = self;
     [self addSubview:_brandsTableView];
 }
 /*
@@ -67,41 +65,36 @@
 #pragma mark - Table view data source
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return self.sectionTitles.count ;
+    return [self.allKeysInDict count];
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    //return self.brandsArray.count + 1;
-    NSArray *tmp = [self.contentsArray objectAtIndex:section];
-
-    return tmp.count;
+    return [[self.allValuesInDict objectAtIndex:section] count];
     
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"FirstLevelCell";
+    static NSString *CellIdentifier = @"BrandCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     NSUInteger row = [indexPath row];
     NSUInteger  section = indexPath.section;
-//    if(row == 0){
-//        cell.textLabel.text = @" ";
-//    }
-//    else{
-//        cell.textLabel.text = [self.brandsArray objectAtIndex:row - 1];
-//        
-//    }
-    if(section == 0)
-        cell.textLabel.text = @" ";
-    else
-        cell.textLabel.text = [[self.contentsArray objectAtIndex:section] objectAtIndex:row];
-        //cell.textLabel.text = @" ";
-    
-    
 
+//    if(section == 0)
+//        cell.textLabel.text = @" ";
+//    else
+//        cell.textLabel.text = [[self.contentsArray objectAtIndex:section] objectAtIndex:row];
+    
+//    CALayer *layer = [CALayer layer];
+//    layer.frame = CGRectMake(0, 0, 320, 0.5);
+//    layer.backgroundColor = [UIColor grayColor].CGColor;
+//    
+//    [cell.layer addSublayer:layer];
+    
+    cell.textLabel.text = [[self.allValuesInDict objectAtIndex:section] objectAtIndex:row];
     return cell;
 }
 
@@ -114,27 +107,46 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.section == 0)
-        return 177;
-    else
-        return 44;
+    return 44;
 }
 
 
-// 每个分区的页眉
+// set Header
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    if(section == 0)
-        return @" ";
-    else
-        return [self.sectionTitles objectAtIndex:section];
+    return [self.allKeysInDict objectAtIndex:section];
 }
-// 索引目录
+// index
 -(NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
 {
-    return self.sectionTitles;
+    return self.allKeysInDict;
 }
 
-
+//custom Header.
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+//{
+//    UIView* myView = [[UIView alloc] init];
+//    myView.backgroundColor = [UIColor yellowColor];
+//    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 20)];
+//    titleLabel.backgroundColor = [UIColor redColor];
+//    titleLabel.textColor=[UIColor greenColor];
+//    titleLabel.backgroundColor = [UIColor clearColor];
+//    
+//    if (section == 0){
+//        titleLabel.text = @"1";
+//    }
+//    else if (section == 1)
+//    {
+//        titleLabel.text = @"2";
+//    }
+//    else
+//    {
+//        titleLabel.text = @"3";
+//    }
+//    
+//    [myView addSubview:titleLabel];
+//    
+//    return myView;
+//}
 
 @end

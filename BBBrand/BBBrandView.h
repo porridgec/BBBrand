@@ -16,5 +16,8 @@
 @property (strong,nonatomic) NSArray *sectionTitles;
 @property (strong,nonatomic) NSArray *contentsArray;
 
+@property (strong,nonatomic) NSMutableArray  *allKeysInDict;
+@property (strong,nonatomic) NSMutableArray *allValuesInDict;
+
 
 @end
