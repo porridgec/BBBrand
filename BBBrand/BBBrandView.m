@@ -20,9 +20,9 @@
     [self setupSelf];
     //self.brandsArray = [[NSMutableArray alloc] initWithObjects:@[@"阿伟",@"阿姨",@"阿三"],nil];
     
-    self.sectionTitles       = [[NSArray alloc] initWithObjects:
+    self.sectionTitles       = [[NSArray alloc] initWithObjects:@"",
                            @"A",@"C",@"F",@"G",@"H",@"M",@"S",@"T",@"X",@"Z", nil];
-    self.contentsArray       = [[NSArray alloc] initWithObjects:
+    self.contentsArray       = [[NSArray alloc] initWithObjects:@[@""],
                            @[@"阿伟",@"阿姨",@"阿三"],
                            @[@"蔡芯",@"成龙",@"陈鑫",@"陈丹",@"成名"],
                            @[@"芳仔",@"房祖名",@"方大同",@"芳芳",@"范伟"],
@@ -47,7 +47,7 @@
               self.viewframe.origin.y,
               self.viewframe.size.height,self.viewframe.size.width);
     //NSLog(@"count is %lu\n",(unsigned long)self.brandsArray.count);
-    self.brandsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.viewframe.size.width, self.viewframe.size.height)];
+    self.brandsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, -100, self.viewframe.size.width, self.viewframe.size.height + 100)];
     //self.brandsTableView.backgroundColor = [UIColor redColor];
 
     self.brandsTableView.dataSource      = self;
@@ -74,10 +74,7 @@
     //return self.brandsArray.count + 1;
     NSArray *tmp = [self.contentsArray objectAtIndex:section];
 
-    if(section == 0)
-        return tmp.count + 1;
-    else
-        return tmp.count;
+    return tmp.count;
     
 }
 
@@ -97,13 +94,8 @@
 //        cell.textLabel.text = [self.brandsArray objectAtIndex:row - 1];
 //        
 //    }
-    if(section == 0){
-        if(row == 0)
-            cell.textLabel.text = @" ";
-        else
-            cell.textLabel.text = [[self.contentsArray objectAtIndex:section] objectAtIndex:row - 1];
-            //cell.textLabel.text = @" ";
-    }
+    if(section == 0)
+        cell.textLabel.text = @" ";
     else
         cell.textLabel.text = [[self.contentsArray objectAtIndex:section] objectAtIndex:row];
         //cell.textLabel.text = @" ";
@@ -122,12 +114,8 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.section == 0){
-        if(indexPath.row == 0)
-            return 100;
-        else
-            return 44;
-    }
+    if(indexPath.section == 0)
+        return 177;
     else
         return 44;
 }
