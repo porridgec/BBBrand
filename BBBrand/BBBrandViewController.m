@@ -47,7 +47,7 @@
     
 
 //    BBBrandView *tmp = [[BBBrandView alloc] initWithFrame:CGRectMake(0, bgdView.frame.origin.y + bgdView.bounds.size.height, 320, self.view.bounds.size.height - bgdView.bounds.size.height)];
-    BBBrandView *tmp = [[BBBrandView alloc] initWithFrame:CGRectMake(0, 100, 320, self.view.bounds.size.height)];
+    BBBrandView *tmp = [[BBBrandView alloc] initWithFrame:CGRectMake(0, 100, 320, self.view.bounds.size.height - 100)];
     //DLog();
     [self.view addSubview:tmp];
     [self.view addSubview:bgdView];

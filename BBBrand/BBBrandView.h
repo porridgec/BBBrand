@@ -9,15 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface BBBrandView : UIView <UITableViewDataSource,UITableViewDelegate>
-@property CGRect viewframe;
-@property (strong,nonatomic) NSMutableArray *brandsArray;
-@property (strong,nonatomic) NSMutableDictionary *brandsTitleDict;
-@property (nonatomic,strong) UITableView *brandsTableView;
-@property (strong,nonatomic) NSArray *sectionTitles;
-@property (strong,nonatomic) NSArray *contentsArray;
 
-@property (strong,nonatomic) NSMutableArray  *allKeysInDict;
-@property (strong,nonatomic) NSMutableArray *allValuesInDict;
+@property CGRect viewframe;
+@property (strong,nonatomic) NSMutableDictionary *brandsTitleDict;
+@property (nonatomic,strong) UITableView         *brandsTableView;
+@property (strong,nonatomic) NSMutableArray      *allKeysInDict;
+@property (strong,nonatomic) NSArray             *allKeysInDictSorted;
 
 
 @end
