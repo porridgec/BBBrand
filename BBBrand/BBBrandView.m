@@ -7,6 +7,7 @@
 //
 
 #import "BBBrandView.h"
+#import "GDIIndexBar.h"
 
 @implementation BBBrandView
 
@@ -43,16 +44,24 @@
 }
 - (void)setupSelf
 {
-    self.brandsTableView                             = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.viewframe.size.width, self.viewframe.size.height)];
-    self.brandsTableView.dataSource                  = self;
-    self.brandsTableView.delegate                    = self;
-    self.brandsTableView.sectionIndexBackgroundColor = [UIColor whiteColor];
-    self.brandsTableView.sectionIndexColor           = [UIColor colorWithRed:0.37 green:0.71 blue:0.39
-                                                                alpha:1.00];
-    
-    self.brandsTableView.sectionHeaderHeight = 23;
-    self.brandsTableView.sectionIndexBackgroundColor = [UIColor redColor];
+    self.brandsTableView                              = [[UITableView alloc] initWithFrame:
+                                                         CGRectMake(0,
+                                                                    0,
+                                                                    self.viewframe.size.width,
+                                                                    self.viewframe.size.height)];
+    self.brandsTableView.dataSource                   = self;
+    self.brandsTableView.delegate                     = self;
+    self.brandsTableView.sectionHeaderHeight          = 23;
+    self.brandsTableView.showsVerticalScrollIndicator = NO;
     [self addSubview:_brandsTableView];
+    
+    GDIIndexBar *indexBar    = [[GDIIndexBar alloc] initWithTableView:self.brandsTableView];
+    indexBar.delegate        = self;
+    indexBar.backgroundColor = [UIColor whiteColor];
+    indexBar.textColor       = [UIColor colorWithRed:0.37 green:0.71 blue:0.39 alpha:1.0];
+    [self addSubview:indexBar];
+    
+    
 }
 
 #pragma mark - Table view data source
@@ -110,14 +119,6 @@
         return @"#";
     return [self.allKeysInDictSorted objectAtIndex:section];
 }
-// index
--(NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
-{
-    NSMutableArray *tmp = [[NSMutableArray alloc] initWithArray:self.allKeysInDictSorted];
-    [tmp removeLastObject];
-    [tmp addObject:@"#"];
-    return tmp;
-}
 
 #pragma mark - custom Header of index
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -152,4 +153,22 @@
     [customHeaderView.layer addSublayer:topLineLayer];
     return customHeaderView;
 }
+
+- (NSUInteger)numberOfIndexesForIndexBar:(GDIIndexBar *)indexBar
+{
+    return self.allKeysInDictSorted.count;
+}
+
+- (NSString *)stringForIndex:(NSUInteger)index
+{
+    return [self.allKeysInDictSorted objectAtIndex:index];
+}
+
+- (void)indexBar:(GDIIndexBar *)indexBar didSelectIndex:(NSUInteger)index
+{
+    [self.brandsTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:index]
+                          atScrollPosition:UITableViewScrollPositionTop
+                                  animated:NO];
+}
+
 @end

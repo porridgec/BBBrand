@@ -8,6 +8,7 @@
 
 #import "BBBrandViewController.h"
 #import "BBBrandView.h"
+#import "GDIIndexBar.h"
 
 @interface BBBrandViewController ()
 
@@ -43,27 +44,16 @@
     UIImageView *bgdView = [[UIImageView alloc] initWithImage:bgd];
     bgdView.alpha = 0.90f;
     
-    
-    
 
-//    BBBrandView *tmp = [[BBBrandView alloc] initWithFrame:CGRectMake(0, bgdView.frame.origin.y + bgdView.bounds.size.height, 320, self.view.bounds.size.height - bgdView.bounds.size.height)];
-    BBBrandView *tmp = [[BBBrandView alloc] initWithFrame:CGRectMake(0, 100, 270, self.view.bounds.size.height - 100)];
-    //DLog();
-    [self.view addSubview:tmp];
+    BBBrandView *brandsTableView = [[BBBrandView alloc] initWithFrame:CGRectMake(0, 100, 270, self.view.bounds.size.height - 100)];
+    [self.view addSubview:brandsTableView];
+    
+//    UIView *tmp = [[UIView alloc] initWithFrame:CGRectMake(0, 100, 270, self.view.bounds.size.height - 100)];
+//    tmp.backgroundColor = [UIColor redColor];
+//    [self.view addSubview:tmp];
     [self.view addSubview:bgdView];
+    
+    
 }
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-
-
 
 @end

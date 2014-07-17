@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GDIIndexBar.h"
 
-@interface BBBrandView : UIView <UITableViewDataSource,UITableViewDelegate>
+@interface BBBrandView : UIView <UITableViewDataSource,UITableViewDelegate,GDIIndexBarDelegate>
 
 @property CGRect viewframe;
 
