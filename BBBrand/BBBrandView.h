@@ -30,6 +30,8 @@
 @property (strong,nonatomic) NSMutableArray      *allKeysInDict;
 @property (strong,nonatomic) NSArray             *allKeysInDictSorted;
 
-@property (strong,nonatomic) BBBrandViewController *vc;
+//need a viewController to push/pop a view
+//@property (strong,nonatomic) VC *aVC;
+//
 
 @end

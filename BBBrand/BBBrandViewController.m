@@ -46,7 +46,6 @@
     
 
     BBBrandView *brandsTableView = [[BBBrandView alloc] initWithFrame:CGRectMake(0, 100, 270, self.view.bounds.size.height - 100)];
-    brandsTableView.vc = self;
 
     [self.view addSubview:brandsTableView];
     
