@@ -47,9 +47,11 @@
     self.brandsTableView.dataSource                  = self;
     self.brandsTableView.delegate                    = self;
     self.brandsTableView.sectionIndexBackgroundColor = [UIColor whiteColor];
-    self.brandsTableView.sectionIndexColor           = [UIColor colorWithRed:0.37 green:0.71 blue:0.39 alpha:1.00];
+    self.brandsTableView.sectionIndexColor           = [UIColor colorWithRed:0.37 green:0.71 blue:0.39
+                                                                alpha:1.00];
     
     self.brandsTableView.sectionHeaderHeight = 23;
+    self.brandsTableView.sectionIndexBackgroundColor = [UIColor redColor];
     [self addSubview:_brandsTableView];
 }
 
@@ -70,18 +72,20 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
+
     NSUInteger row = [indexPath row];
     NSUInteger  section = indexPath.section;
 
     cell.textLabel.text = [@" " stringByAppendingString:[[[self.resultDict objectForKey:[self.allKeysInDictSorted objectAtIndex:section]] objectAtIndex:row] objectForKey:@"name"]];
     cell.textLabel.textColor = [UIColor colorWithRed:0.33 green:0.33 blue:0.33 alpha:1.00];
+
     
     CALayer *buttomLineLayer        = [CALayer layer];
     buttomLineLayer.frame           = CGRectMake(0, 39.5 , 320, 0.5);
     buttomLineLayer.backgroundColor = [UIColor colorWithRed:0.78 green:0.78 blue:0.80 alpha:1.00].CGColor;
     
     [cell.layer addSublayer:buttomLineLayer];
-
+    
     return cell;
 }
 
@@ -129,7 +133,7 @@
     
     [self.allKeysInDictSorted objectAtIndex:section];
 
-    indexLabel.textColor = [UIColor colorWithRed:0.37 green:0.71 blue:0.39 alpha:1.00];
+    indexLabel.textColor = [UIColor colorWithRed:0.37 green:0.71 blue:0.39 alpha:1.0];
     
     [customHeaderView addSubview:indexLabel];
     
