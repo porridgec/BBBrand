@@ -6,10 +6,12 @@
 //  Copyright (c) 2014 Hahn.Chan. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "GDIIndexBar.h"
+#import "BBBrandViewController.h"
 
-@interface BBBrandView : UIView <UITableViewDataSource,UITableViewDelegate,GDIIndexBarDelegate>
+@interface BBBrandView : UIView <UITableViewDataSource,UITableViewDelegate, GDIIndexBarDelegate>
 
 @property CGRect viewframe;
 
@@ -28,5 +30,6 @@
 @property (strong,nonatomic) NSMutableArray      *allKeysInDict;
 @property (strong,nonatomic) NSArray             *allKeysInDictSorted;
 
+@property (strong,nonatomic) BBBrandViewController *vc;
 
 @end

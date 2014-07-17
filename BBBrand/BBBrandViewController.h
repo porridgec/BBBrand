@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BBBrandViewController : UIViewController
+@interface BBBrandViewController : UIViewController 
 
 @end

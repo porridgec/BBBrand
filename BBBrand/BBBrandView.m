@@ -8,6 +8,7 @@
 
 #import "BBBrandView.h"
 #import "GDIIndexBar.h"
+#import "BBaassasdViewController.h"
 
 @implementation BBBrandView
 
@@ -101,8 +102,9 @@
 #pragma mark - Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    //go to next view
+    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    //into searhc view
     
 }
 
@@ -110,6 +112,7 @@
 {
     return 40;
 }
+
 
 #pragma mark - index
 // set Header
