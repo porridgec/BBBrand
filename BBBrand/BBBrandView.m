@@ -8,7 +8,6 @@
 
 #import "BBBrandView.h"
 #import "GDIIndexBar.h"
-#import "BBaassasdViewController.h"
 
 @implementation BBBrandView
 
@@ -105,6 +104,7 @@
     //go to next view
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
     
 }
 
@@ -113,15 +113,6 @@
     return 40;
 }
 
-
-#pragma mark - index
-// set Header
--(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    if([[self.allKeysInDictSorted objectAtIndex:section] isEqual:@"other"])
-        return @"#";
-    return [self.allKeysInDictSorted objectAtIndex:section];
-}
 
 #pragma mark - custom Header of index
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -157,6 +148,8 @@
     return customHeaderView;
 }
 
+
+#pragma mark - delegate of IndexBar
 - (NSUInteger)numberOfIndexesForIndexBar:(GDIIndexBar *)indexBar
 {
     return self.allKeysInDictSorted.count;
@@ -164,7 +157,12 @@
 
 - (NSString *)stringForIndex:(NSUInteger)index
 {
-    return [self.allKeysInDictSorted objectAtIndex:index];
+    if (index == self.allKeysInDictSorted.count - 1) {
+        return @"#";
+    }
+    else{
+        return [self.allKeysInDictSorted objectAtIndex:index];
+    }
 }
 
 - (void)indexBar:(GDIIndexBar *)indexBar didSelectIndex:(NSUInteger)index

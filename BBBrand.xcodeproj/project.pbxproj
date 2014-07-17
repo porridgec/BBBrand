@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		A922CC5E1974D85E0096809B /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = A922CC5D1974D85E0096809B /* back.png */; };
 		A9880FC819777452009D515B /* GDIIndexBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A9880FC719777452009D515B /* GDIIndexBar.m */; };
-		A9880FCB19778591009D515B /* BBaassasdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9880FCA19778591009D515B /* BBaassasdViewController.m */; };
 		A98EEE941974CDFE0029BA79 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A98EEE931974CDFE0029BA79 /* Foundation.framework */; };
 		A98EEE961974CDFE0029BA79 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A98EEE951974CDFE0029BA79 /* CoreGraphics.framework */; };
 		A98EEE981974CDFE0029BA79 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A98EEE971974CDFE0029BA79 /* UIKit.framework */; };
@@ -40,8 +39,6 @@
 		A922CC5D1974D85E0096809B /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		A9880FC619777452009D515B /* GDIIndexBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDIIndexBar.h; sourceTree = "<group>"; };
 		A9880FC719777452009D515B /* GDIIndexBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDIIndexBar.m; sourceTree = "<group>"; };
-		A9880FC919778591009D515B /* BBaassasdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBaassasdViewController.h; sourceTree = "<group>"; };
-		A9880FCA19778591009D515B /* BBaassasdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBaassasdViewController.m; sourceTree = "<group>"; };
 		A98EEE901974CDFE0029BA79 /* BBBrand.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BBBrand.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A98EEE931974CDFE0029BA79 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A98EEE951974CDFE0029BA79 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -135,8 +132,6 @@
 				A98EEEC31974CE190029BA79 /* BBBrandViewController.m */,
 				A98EEEC51974CF530029BA79 /* BBBrandView.h */,
 				A98EEEC61974CF530029BA79 /* BBBrandView.m */,
-				A9880FC919778591009D515B /* BBaassasdViewController.h */,
-				A9880FCA19778591009D515B /* BBaassasdViewController.m */,
 				A9880FC619777452009D515B /* GDIIndexBar.h */,
 				A9880FC719777452009D515B /* GDIIndexBar.m */,
 				A98EEEA51974CDFE0029BA79 /* Images.xcassets */,
@@ -277,7 +272,6 @@
 				A98EEEC41974CE190029BA79 /* BBBrandViewController.m in Sources */,
 				A98EEEC71974CF530029BA79 /* BBBrandView.m in Sources */,
 				A98EEEA01974CDFE0029BA79 /* main.m in Sources */,
-				A9880FCB19778591009D515B /* BBaassasdViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
