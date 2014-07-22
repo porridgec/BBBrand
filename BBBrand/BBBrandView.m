@@ -38,8 +38,42 @@
     
     
     self.resultDict          = [responseDict objectForKey:@"result"];
+    self.finalDict           = [[NSMutableDictionary alloc] init];
+    self.allNumberKeyValues  = [[NSMutableArray alloc] init];
+    self.otherValues         = [[NSArray alloc] init];
     self.allKeysInDict       = [[NSMutableArray alloc] initWithArray:[self.resultDict allKeys]];
-    self.allKeysInDictSorted = [self.allKeysInDict sortedArrayUsingSelector:@selector(compare:)];
+    
+    self.allNumberKeys = [[NSMutableArray alloc] init];
+    self.allKeysInDictWithoutNumberKeys = [[NSMutableArray alloc] init];
+    for(NSUInteger i = 0 ;i < self.allKeysInDict.count;i ++){
+        if([[self.allKeysInDict objectAtIndex:i] isEqualToString:@"0"] ||
+           [[self.allKeysInDict objectAtIndex:i] isEqualToString:@"1"] ||
+           [[self.allKeysInDict objectAtIndex:i] isEqualToString:@"2"] ||
+           [[self.allKeysInDict objectAtIndex:i] isEqualToString:@"3"] ||
+           [[self.allKeysInDict objectAtIndex:i] isEqualToString:@"4"] ||
+           [[self.allKeysInDict objectAtIndex:i] isEqualToString:@"5"] ||
+           [[self.allKeysInDict objectAtIndex:i] isEqualToString:@"6"] ||
+           [[self.allKeysInDict objectAtIndex:i] isEqualToString:@"7"] ||
+           [[self.allKeysInDict objectAtIndex:i] isEqualToString:@"8"] ||
+           [[self.allKeysInDict objectAtIndex:i] isEqualToString:@"9"] ){
+            [self.allNumberKeys addObject:[self.allKeysInDict objectAtIndex:i]];
+            [self.allNumberKeyValues addObjectsFromArray:[self.resultDict objectForKey:[self.allKeysInDict objectAtIndex:i]]];
+        }
+        else{
+            [self.allKeysInDictWithoutNumberKeys addObject:[self.allKeysInDict objectAtIndex:i]];
+        }
+    }
+    self.allKeysInDictWithoutNumberKeysSorted = [self.allKeysInDictWithoutNumberKeys sortedArrayUsingSelector:@selector(compare:)];
+    
+    for(NSUInteger j = 0; j < self.allKeysInDictWithoutNumberKeysSorted.count; j ++){
+        [self.finalDict setObject:[self.resultDict objectForKey:[self.allKeysInDictWithoutNumberKeysSorted objectAtIndex:j]] forKey:[self.allKeysInDictWithoutNumberKeysSorted objectAtIndex:j]];
+    }
+    self.otherValues = [[self.finalDict objectForKey:@"other"] arrayByAddingObjectsFromArray:self.allNumberKeyValues];
+    
+    [self.finalDict removeObjectForKey:@"other"];
+    [self.finalDict setObject:self.otherValues forKey:@"other"];
+    
+
     
 }
 - (void)setupSelf
@@ -67,11 +101,13 @@
 #pragma mark - Table view data source
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [self.allKeysInDict count];
+//    return [self.allKeysInDict count];
+    return [self.allKeysInDictWithoutNumberKeysSorted count];
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[self.resultDict objectForKey:[self.allKeysInDictSorted objectAtIndex:section]]count];
+//    return [[self.resultDict objectForKey:[self.allKeysInDictSorted objectAtIndex:section]]count];
+    return [[self.finalDict objectForKey:[self.allKeysInDictWithoutNumberKeysSorted objectAtIndex:section]]count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -85,7 +121,8 @@
     NSUInteger row = [indexPath row];
     NSUInteger  section = indexPath.section;
 
-    cell.textLabel.text = [@" " stringByAppendingString:[[[self.resultDict objectForKey:[self.allKeysInDictSorted objectAtIndex:section]] objectAtIndex:row] objectForKey:@"name"]];
+//    cell.textLabel.text = [@" " stringByAppendingString:[[[self.resultDict objectForKey:[self.allKeysInDictSorted objectAtIndex:section]] objectAtIndex:row] objectForKey:@"name"]];
+        cell.textLabel.text = [@" " stringByAppendingString:[[[self.finalDict objectForKey:[self.allKeysInDictWithoutNumberKeysSorted objectAtIndex:section]] objectAtIndex:row] objectForKey:@"name"]];
     cell.textLabel.textColor = [UIColor colorWithRed:0.33 green:0.33 blue:0.33 alpha:1.00];
 
     
@@ -121,12 +158,17 @@
     customHeaderView.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.96 alpha:1.00];
     UILabel *indexLabel              = [[UILabel alloc] initWithFrame:CGRectMake(22, 0, 100, 23)];
     
-    if([[self.allKeysInDictSorted objectAtIndex:section] isEqual:@"other"])
+//    if([[self.allKeysInDictSorted objectAtIndex:section] isEqual:@"other"])
+//        indexLabel.text = @"#";
+//    else
+//        indexLabel.text = [self.allKeysInDictSorted objectAtIndex:section];
+//    
+//    [self.allKeysInDictSorted objectAtIndex:section];
+    if([[self.allKeysInDictWithoutNumberKeysSorted objectAtIndex:section] isEqual:@"other"])
         indexLabel.text = @"#";
     else
-        indexLabel.text = [self.allKeysInDictSorted objectAtIndex:section];
-    
-    [self.allKeysInDictSorted objectAtIndex:section];
+        indexLabel.text = [self.allKeysInDictWithoutNumberKeysSorted objectAtIndex:section];
+
 
     indexLabel.textColor = [UIColor colorWithRed:0.37 green:0.71 blue:0.39 alpha:1.0];
     
@@ -152,16 +194,23 @@
 #pragma mark - delegate of IndexBar
 - (NSUInteger)numberOfIndexesForIndexBar:(GDIIndexBar *)indexBar
 {
-    return self.allKeysInDictSorted.count;
+//    return self.allKeysInDictSorted.count;
+    return self.allKeysInDictWithoutNumberKeysSorted.count;
 }
 
 - (NSString *)stringForIndex:(NSUInteger)index
 {
-    if (index == self.allKeysInDictSorted.count - 1) {
+//    if (index == self.allKeysInDictSorted.count - 1) {
+//        return @"#";
+//    }
+//    else{
+//        return [self.allKeysInDictSorted objectAtIndex:index];
+//    }
+    if (index == self.allKeysInDictWithoutNumberKeysSorted.count - 1) {
         return @"#";
     }
     else{
-        return [self.allKeysInDictSorted objectAtIndex:index];
+        return [self.allKeysInDictWithoutNumberKeysSorted objectAtIndex:index];
     }
 }
 

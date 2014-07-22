@@ -18,6 +18,7 @@
 @property (strong,nonatomic) UITableView         *brandsTableView;
 
 @property (strong,nonatomic) NSMutableDictionary *resultDict;
+@property (strong,nonatomic) NSMutableDictionary *finalDict;
 /* resultDict is like
  * {
  *    "A" : @[......];
@@ -28,7 +29,11 @@
  *
  */
 @property (strong,nonatomic) NSMutableArray      *allKeysInDict;
-@property (strong,nonatomic) NSArray             *allKeysInDictSorted;
+@property (strong,nonatomic) NSMutableArray      *allKeysInDictWithoutNumberKeys;
+@property (strong,nonatomic) NSMutableArray      *allNumberKeys;
+@property (strong,nonatomic) NSMutableArray      *allNumberKeyValues;
+@property (strong,nonatomic) NSArray             *otherValues;
+@property (strong,nonatomic) NSArray             *allKeysInDictWithoutNumberKeysSorted;
 
 //need a viewController to push/pop a view
 //@property (strong,nonatomic) VC *aVC;
